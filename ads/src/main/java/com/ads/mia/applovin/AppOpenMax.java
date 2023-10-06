@@ -73,16 +73,17 @@ public class AppOpenMax implements Application.ActivityLifecycleCallbacks, Lifec
     }
 
     // Load App Open Splash
-    private void initOpenSplash(Context context, String idOpenSplash) {
-        AppLovinSdk.initializeSdk(context, new AppLovinSdk.SdkInitializationListener() {
+    public void initOpenSplash(Activity activity, String idOpenSplash, int timeOut, MiaAdCallback miaAdCallback) {
+        AppLovinSdk.initializeSdk(activity, new AppLovinSdk.SdkInitializationListener() {
             @Override
             public void onSdkInitialized(AppLovinSdkConfiguration config) {
-                appOpenSplash = new MaxAppOpenAd(idOpenSplash, context);
+                appOpenSplash = new MaxAppOpenAd(idOpenSplash, activity);
+                showAdSplashIfReady(activity, timeOut, miaAdCallback);
             }
         });
     }
 
-    public void showAdSplashIfReady(Activity activity, int timeOut, int timeDelay, MiaAdCallback miaAdCallback) {
+    public void showAdSplashIfReady(Activity activity, int timeOut, MiaAdCallback miaAdCallback) {
         isTimeOut = false;
         hTimeout = new Handler();
         rTimeout = new Runnable() {
@@ -95,7 +96,7 @@ public class AppOpenMax implements Application.ActivityLifecycleCallbacks, Lifec
                 }
 
                 if (miaAdCallback != null) {
-                    miaAdCallback.onNextAction();
+                    miaAdCallback.onAdClosed();
                     isShowAppOpenSplash = false;
                 }
             }
@@ -127,19 +128,19 @@ public class AppOpenMax implements Application.ActivityLifecycleCallbacks, Lifec
 
             @Override
             public void onAdLoadFailed(String adUnitId, MaxError error) {
-                if (hTimeout != null && rTimeout != null) {
+                /*if (hTimeout != null && rTimeout != null) {
                     hTimeout.removeCallbacks(rTimeout);
                 }
                 if (miaAdCallback != null) {
                     miaAdCallback.onAdFailedToLoad(new ApAdError(error));
-                }
+                }*/
             }
 
             @Override
             public void onAdDisplayFailed(MaxAd ad, MaxError error) {
-                if (miaAdCallback != null) {
+                /*if (miaAdCallback != null) {
                     miaAdCallback.onAdFailedToShow(new ApAdError(error));
-                }
+                }*/
             }
         });
         appOpenSplash.loadAd();
@@ -210,6 +211,7 @@ public class AppOpenMax implements Application.ActivityLifecycleCallbacks, Lifec
                         dialog.show();
                     } catch (Exception e) {
                         miaAdCallback.onAdClosed();
+                        miaAdCallback.onNextAction();
                         return;
                     }
                 } catch (Exception e) {

@@ -20,8 +20,9 @@
 
 
     <!-- MAX TEST ID -->
-    <string name="applovin_test_inter">c630fe3686063741</string>
-    <string name="applovin_test_banner">31cdd2e81ad9805e</string>
-    <string name="applovin_test_native">b8f6f81612cddf23</string>
-    <string name="applovin_test_reward">5ac0003d6da0d104</string>
+    <string name="sdk_key">szyUmwGA0KXmgPKVL0LcrqGVCNJUXwL6FOdJtte_WI9GRLkuJRUAxA0NXFC2gxegRxaCJk2gX1CIfIbfQBQ9wW</string>
+    <string name="applovin_test_inter">54234b223e3dfdfa</string>
+    <string name="applovin_test_banner">9985fc9e89cd4704</string>
+    <string name="applovin_test_native">9985fc9e89cd4704</string>
+    <string name="applovin_test_open">f5d425c65f92c24a</string>
 </resources>

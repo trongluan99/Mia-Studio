@@ -45,7 +45,7 @@ public class MyApplication extends AdsMultiDexApplication {
 
     private void initAds() {
         String environment = BuildConfig.env_dev ? MiaAdConfig.ENVIRONMENT_DEVELOP : MiaAdConfig.ENVIRONMENT_PRODUCTION;
-        miaAdConfig = new MiaAdConfig(this, MiaAdConfig.PROVIDER_ADMOB, environment);
+        miaAdConfig = new MiaAdConfig(this, MiaAdConfig.PROVIDER_MAX, environment);
 
         AdjustConfig adjustConfig = new AdjustConfig(true,ADJUST_TOKEN);
         adjustConfig.setEventAdImpression(EVENT_AD_IMPRESSION_ADJUST);
@@ -55,7 +55,6 @@ public class MyApplication extends AdsMultiDexApplication {
 
         AppsflyerConfig appsflyerConfig = new AppsflyerConfig(true,APPSFLYER_TOKEN);
 
-        miaAdConfig.setIdAdResume(BuildConfig.ads_open_app);
 
         listTestDevice.add("EC25F576DA9B6CE74778B268CB87E431");
         miaAdConfig.setListDeviceTest(listTestDevice);

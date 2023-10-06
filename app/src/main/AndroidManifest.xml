@@ -20,15 +20,27 @@
 
         </activity>
         <activity android:name="com.mia.module.activity.ContentActivity" />
+
         <activity android:name="com.mia.module.activity.MainActivity" />
 
-        <activity android:name="com.mia.module.activity.SplashActivity"
+        <activity
+            android:name="com.mia.module.activity.SplashMaxActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.mia.module.activity.SplashActivity"
+            android:exported="true">
+            <!--<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
             <intent-filter tools:ignore="AppLinkUrlError">
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.MAIN" />
@@ -64,7 +76,7 @@
             android:value="@string/admod_app_id" />
         <meta-data
             android:name="applovin.sdk.key"
-            android:value="3N4Mt8SNhOzkQnGb9oHsRRG1ItybcZDpJWN1fVAHLdRagxP-_k_ZXVaMAdMe5Otsmp6qJSXskfsrtakfRmPAGW" />
+            android:value="@string/sdk_key" />
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
