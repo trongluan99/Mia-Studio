@@ -45,7 +45,7 @@ public class MyApplication extends AdsMultiDexApplication {
 
     private void initAds() {
         String environment = BuildConfig.env_dev ? MiaAdConfig.ENVIRONMENT_DEVELOP : MiaAdConfig.ENVIRONMENT_PRODUCTION;
-        miaAdConfig = new MiaAdConfig(this, MiaAdConfig.PROVIDER_MAX, environment);
+        miaAdConfig = new MiaAdConfig(this, MiaAdConfig.PROVIDER_ADMOB, environment);
 
         AdjustConfig adjustConfig = new AdjustConfig(true,ADJUST_TOKEN);
         adjustConfig.setEventAdImpression(EVENT_AD_IMPRESSION_ADJUST);

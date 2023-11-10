@@ -244,7 +244,7 @@ public class MainActivity extends AppCompatActivity {
         if (unifiedNativeAd == null)
             return;
 
-        DialogExitApp1 dialogExitApp1 = new DialogExitApp1(this, unifiedNativeAd, 1);
+        DialogExitApp1 dialogExitApp1 = new DialogExitApp1(this, unifiedNativeAd, 3);
         dialogExitApp1.setDialogExitListener(new DialogExitListener() {
             @Override
             public void onExit(boolean exit) {
