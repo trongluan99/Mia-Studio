@@ -59,6 +59,7 @@ public class MyApplication extends AdsMultiDexApplication {
         listTestDevice.add("EC25F576DA9B6CE74778B268CB87E431");
         miaAdConfig.setListDeviceTest(listTestDevice);
         miaAdConfig.setIntervalInterstitialAd(15);
+        miaAdConfig.setAdjustTokenTiktok("123456");
 
         MiaAd.getInstance().init(this, miaAdConfig, false);
 

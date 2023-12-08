@@ -15,6 +15,7 @@ import com.ads.mia.admob.Admob;
 import com.ads.mia.ads.wrapper.ApAdValue;
 import com.ads.mia.ads.wrapper.ApNativeAd;
 import com.ads.mia.ads.wrapper.StatusAd;
+import com.ads.mia.config.MiaAdConfig;
 import com.ads.mia.funtion.AdCallback;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.gms.ads.AdValue;
@@ -106,7 +107,7 @@ public class MiaAdPlacer {
                             super.onAdImpression();
                             MiaAdPlacer.this.onAdImpression();
                         }
-                    });
+                    }, MiaAdConfig.ADJUST_TOKEN_TIKTOK);
                 });
             }
         } else {
@@ -145,7 +146,7 @@ public class MiaAdPlacer {
                 Log.i(TAG, "native ad in recycle loaded: " + countLoadAd);
                 countLoadAd++;
             }
-        }, Math.min(listAd.size(), settings.getPositionFixAd()));
+        }, Math.min(listAd.size(), settings.getPositionFixAd()), MiaAdConfig.ADJUST_TOKEN_TIKTOK);
     }
 
     public boolean isAdPosition(int pos) {

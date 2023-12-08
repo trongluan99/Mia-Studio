@@ -236,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
             public void onAdImpression() {
                 super.onAdImpression();
             }
-        });
+        }, MiaAdConfig.ADJUST_TOKEN_TIKTOK);
     }
 
     @Override

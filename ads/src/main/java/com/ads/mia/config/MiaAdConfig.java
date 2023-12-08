@@ -16,6 +16,7 @@ public class MiaAdConfig {
     public static final String ENVIRONMENT_PRODUCTION = "production";
 
     public static final String DEFAULT_TOKEN_FACEBOOK_SDK = "client_token";
+    public static String ADJUST_TOKEN_TIKTOK = "client_token_adjust_tiktok";
 
     /**
      * config ad mediation using for app
@@ -44,6 +45,7 @@ public class MiaAdConfig {
     private boolean enableAdResume = false;
     private String facebookClientToken = DEFAULT_TOKEN_FACEBOOK_SDK;
 
+    private String adjustTokenTiktok;
     /**
      * intervalInterstitialAd: time between two interstitial ad impressions
      * unit: seconds
@@ -161,5 +163,14 @@ public class MiaAdConfig {
 
     public String getFacebookClientToken() {
         return this.facebookClientToken;
+    }
+
+    public String getAdjustTokenTiktok() {
+        return adjustTokenTiktok;
+    }
+
+    public void setAdjustTokenTiktok(String adjustTokenTiktok) {
+        ADJUST_TOKEN_TIKTOK = adjustTokenTiktok;
+        this.adjustTokenTiktok = adjustTokenTiktok;
     }
 }

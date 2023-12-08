@@ -4,6 +4,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.adjust.sdk.Adjust;
+import com.adjust.sdk.AdjustEvent;
 import com.ads.mia.config.MiaAdConfig;
 import com.ads.mia.funtion.AdType;
 import com.ads.mia.util.AppUtil;
@@ -33,6 +35,14 @@ public class MiaLogEventManager {
         logEventWithMaxAds(context, adValue);
         MiaAdjust.pushTrackEventApplovin(adValue, context);
         MiaAppsflyer.getInstance().pushTrackEventApplovin(adValue, adType);
+    }
+
+    public static void logPaidAdjustWithToken(AdValue adValue, String adUnitId, String token) {
+        AdjustEvent adjustEvent = new AdjustEvent(token);
+        float value = adValue.getValueMicros() * 1.0f / 1000000;
+        adjustEvent.setRevenue(value, "USD");
+        adjustEvent.setOrderId(adUnitId);
+        Adjust.trackEvent(adjustEvent);
     }
 
     private static void logEventWithMaxAds(Context context, MaxAd impressionData) {
