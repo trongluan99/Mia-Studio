@@ -86,6 +86,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.UUID;
 
 public class Admob {
     private static final String TAG = "MiaStudio";
@@ -1988,16 +1989,8 @@ public class Admob {
         AdRequest.Builder builder = new AdRequest.Builder();
         Bundle admobExtras = new Bundle();
         admobExtras.putString("collapsible", gravity);
+        admobExtras.putString("collapsible_request_id", UUID.randomUUID().toString());
         builder.addNetworkExtrasBundle(AdMobAdapter.class, admobExtras);
-        // no need from facebook sdk ver 6.12.0.0
-        /*if (isFan) {
-            Bundle extras = new FacebookExtras()
-                    .setNativeBanner(true)
-                    .build();
-
-            builder.addNetworkExtrasBundle(FacebookAdapter.class, extras);
-        }*/
-
         if (isAdcolony) {
             AdColonyBundleBuilder.setShowPrePopup(true);
             AdColonyBundleBuilder.setShowPostPopup(true);
