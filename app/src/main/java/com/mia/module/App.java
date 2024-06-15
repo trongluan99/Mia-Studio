@@ -18,9 +18,10 @@ public class App extends AdsMultiDexApplication {
         String environment = BuildConfig.DEBUG ? MiaAdConfig.ENVIRONMENT_DEVELOP : MiaAdConfig.ENVIRONMENT_PRODUCTION;
         mMiaAdConfig = new MiaAdConfig(this, environment);
 
-        AdjustConfig adjustConfig = new AdjustConfig(true, getResources().getString(R.string.adjust_token));
+        AdjustConfig adjustConfig = new AdjustConfig(true,getString(R.string.adjust_token));
         mMiaAdConfig.setAdjustConfig(adjustConfig);
-        mMiaAdConfig.setFacebookClientToken(getResources().getString(R.string.facebook_client_token));
+        mMiaAdConfig.setFacebookClientToken(getString(R.string.facebook_client_token));
+        mMiaAdConfig.setAdjustTokenTiktok(getString(R.string.tiktok_token));
 
         mMiaAdConfig.setIdAdResume("");
 
