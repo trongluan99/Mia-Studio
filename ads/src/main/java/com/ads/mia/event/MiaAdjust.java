@@ -30,7 +30,6 @@ public class MiaAdjust {
 
     public static void onTrackEvent(String eventName, String id) {
         AdjustEvent event = new AdjustEvent(eventName);
-        // Assign custom identifier to event which will be reported in success/failure callbacks.
         event.setCallbackId(id);
         Adjust.trackEvent(event);
     }

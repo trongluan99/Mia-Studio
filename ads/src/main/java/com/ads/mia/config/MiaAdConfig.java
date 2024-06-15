@@ -11,17 +11,11 @@ public class MiaAdConfig {
     public static final int PROVIDER_ADMOB = 0;
     public static final int PROVIDER_MAX = 1;
 
-
     public static final String ENVIRONMENT_DEVELOP = "develop";
     public static final String ENVIRONMENT_PRODUCTION = "production";
 
     public static final String DEFAULT_TOKEN_FACEBOOK_SDK = "client_token";
     public static String ADJUST_TOKEN_TIKTOK = "client_token_adjust_tiktok";
-
-    /**
-     * config ad mediation using for app
-     */
-    private int mediationProvider = PROVIDER_ADMOB;
 
     private boolean isVariantDev = false;
 
@@ -30,10 +24,6 @@ public class MiaAdConfig {
      */
     private AdjustConfig adjustConfig;
 
-    /**
-     * appsflyerConfig enable Appsflyer and setup dev key
-     */
-    private AppsflyerConfig appsflyerConfig;
     /**
      * eventNamePurchase push event to adjust when user purchased
      */
@@ -46,6 +36,7 @@ public class MiaAdConfig {
     private String facebookClientToken = DEFAULT_TOKEN_FACEBOOK_SDK;
 
     private String adjustTokenTiktok;
+
     /**
      * intervalInterstitialAd: time between two interstitial ad impressions
      * unit: seconds
@@ -56,19 +47,12 @@ public class MiaAdConfig {
         this.application = application;
     }
 
-    public MiaAdConfig(Application application, int mediationProvider, String environment) {
-        this.mediationProvider = mediationProvider;
+    public MiaAdConfig(Application application, String environment) {
         this.isVariantDev = environment.equals(ENVIRONMENT_DEVELOP);
         this.application = application;
     }
 
-
-    public void setMediationProvider(int mediationProvider) {
-        this.mediationProvider = mediationProvider;
-    }
-
     /**
-     *
      * @param isVariantDev
      */
     @Deprecated
@@ -88,14 +72,6 @@ public class MiaAdConfig {
         this.adjustConfig = adjustConfig;
     }
 
-    public AppsflyerConfig getAppsflyerConfig() {
-        return appsflyerConfig;
-    }
-
-    public void setAppsflyerConfig(AppsflyerConfig appsflyerConfig) {
-        this.appsflyerConfig = appsflyerConfig;
-    }
-
     public String getEventNamePurchase() {
         return eventNamePurchase;
     }
@@ -104,10 +80,6 @@ public class MiaAdConfig {
         return application;
     }
 
-
-    public int getMediationProvider() {
-        return mediationProvider;
-    }
 
     public Boolean isVariantDev() {
         return isVariantDev;
@@ -141,12 +113,6 @@ public class MiaAdConfig {
         if (adjustConfig == null)
             return false;
         return adjustConfig.isEnableAdjust();
-    }
-
-    public boolean isEnableAppsflyer() {
-        if (appsflyerConfig == null)
-            return false;
-        return appsflyerConfig.isEnableAppsflyer();
     }
 
     public int getIntervalInterstitialAd() {

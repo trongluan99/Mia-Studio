@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 
 public class AdmobHelper {
     private static final String FILE_SETTING = "setting.pref";
-    private static final String FILE_SETTING_ADMOB = "setting_admoB.pref";
+    private static final String FILE_SETTING_ADMOB = "setting_admob.pref";
     private static final String IS_PURCHASE = "IS_PURCHASE";
     private static final String IS_FIRST_OPEN = "IS_FIRST_OPEN";
     private static final String KEY_FIRST_TIME = "KEY_FIRST_TIME";
