@@ -95,7 +95,65 @@ public class App extends AdsMultiDexApplication {
 ~~~
 
 # Ad Splash Interstitial
+MiaAd.getInstance().loadSplashInterstitialAds(this, BuildConfig.ad_interstitial_splash, 25000, 5000, new AdCallback() {
+            @Override
+            public void onNextAction() {
+                super.onNextAction();
+                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                finish();
+            }
+        });
 
+# Ad Banner
+MiaAd.getInstance().loadBanner(this, BuildConfig.ad_banner);
+
+# Ad Collapsible Banner
+MiaAd.getInstance().loadCollapsibleBanner(this, BuildConfig.ad_banner, AppConstant.CollapsibleGravity.BOTTOM, new AdCallback());
+
+# Native: Load And Show
+MiaAd.getInstance().loadNativeAd(this, BuildConfig.ad_native, R.layout.native_large, frAds, shimmerAds, new AdCallback() {
+            @Override
+            public void onAdFailedToLoad(@Nullable LoadAdError i) {
+                super.onAdFailedToLoad(i);
+                frAds.removeAllViews();
+            }
+
+            @Override
+            public void onAdFailedToShow(@Nullable AdError adError) {
+                super.onAdFailedToShow(adError);
+                frAds.removeAllViews();
+            }
+        });
+
+# Native: Load
+private ApNativeAd mApNativeAd;
+MiaAd.getInstance().loadNativeAdResultCallback(this, BuildConfig.ad_native, R.layout.native_large, new AdCallback() {
+            @Override
+            public void onNativeAdLoaded(@NonNull ApNativeAd nativeAd) {
+                super.onNativeAdLoaded(nativeAd);
+
+                mApNativeAd = nativeAd;
+            }
+
+            @Override
+            public void onAdFailedToLoad(@Nullable LoadAdError i) {
+                super.onAdFailedToLoad(i);
+
+                mApNativeAd = null;
+            }
+
+            @Override
+            public void onAdFailedToShow(@Nullable AdError adError) {
+                super.onAdFailedToShow(adError);
+
+                mApNativeAd = null;
+            }
+        });
+
+# Native: Show
+if (mApNativeAd != null) {
+            MiaAd.getInstance().populateNativeAdView(this, mApNativeAd, frAds, shimmerAds);
+        }
 
 
 
