@@ -6,11 +6,13 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ads.mia.ads.MiaAd;
 import com.ads.mia.ads.wrapper.ApInterstitialAd;
+import com.ads.mia.ads.wrapper.ApNativeAd;
 import com.ads.mia.funtion.AdCallback;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.gms.ads.AdError;
@@ -21,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnLoad, btnShow;
     private FrameLayout frAds;
     private ShimmerFrameLayout shimmerAds;
+    private ApNativeAd mApNativeAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         MiaAd.getInstance().loadBanner(this, BuildConfig.ad_banner);
         /*MiaAd.getInstance().loadCollapsibleBanner(this, BuildConfig.ad_banner, AppConstant.CollapsibleGravity.BOTTOM, new AdCallback());*/
 
-        // Native Ads
+        // Native Ads: Load And Show
         MiaAd.getInstance().loadNativeAd(this, BuildConfig.ad_native, R.layout.native_large, frAds, shimmerAds, new AdCallback() {
             @Override
             public void onAdFailedToLoad(@Nullable LoadAdError i) {
@@ -69,6 +72,35 @@ public class MainActivity extends AppCompatActivity {
                 frAds.removeAllViews();
             }
         });
+
+        // Native Ads: Load
+        MiaAd.getInstance().loadNativeAdResultCallback(this, BuildConfig.ad_native, R.layout.native_large, new AdCallback() {
+            @Override
+            public void onNativeAdLoaded(@NonNull ApNativeAd nativeAd) {
+                super.onNativeAdLoaded(nativeAd);
+
+                mApNativeAd = nativeAd;
+            }
+
+            @Override
+            public void onAdFailedToLoad(@Nullable LoadAdError i) {
+                super.onAdFailedToLoad(i);
+
+                mApNativeAd = null;
+            }
+
+            @Override
+            public void onAdFailedToShow(@Nullable AdError adError) {
+                super.onAdFailedToShow(adError);
+
+                mApNativeAd = null;
+            }
+        });
+
+        // Native Ads: Show
+        if (mApNativeAd != null) {
+            MiaAd.getInstance().populateNativeAdView(this, mApNativeAd, frAds, shimmerAds);
+        }
 
     }
 }
