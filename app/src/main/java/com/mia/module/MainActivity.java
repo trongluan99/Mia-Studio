@@ -13,14 +13,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.ads.mia.ads.MiaAd;
 import com.ads.mia.ads.wrapper.ApInterstitialAd;
 import com.ads.mia.ads.wrapper.ApNativeAd;
+import com.ads.mia.billing.AppPurchase;
 import com.ads.mia.funtion.AdCallback;
+import com.ads.mia.funtion.PurchaseListener;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.LoadAdError;
 
 public class MainActivity extends AppCompatActivity {
     private ApInterstitialAd mInterstitialAd;
-    private Button btnLoad, btnShow;
+    private Button btnLoad, btnShow, btnIap;
     private FrameLayout frAds;
     private ShimmerFrameLayout shimmerAds;
     private ApNativeAd mApNativeAd;
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnLoad = findViewById(R.id.btnLoad);
         btnShow = findViewById(R.id.btnShow);
+        btnIap = findViewById(R.id.btnIap);
         frAds = findViewById(R.id.fr_ads);
         shimmerAds = findViewById(R.id.shimmer_native);
 
@@ -101,6 +104,26 @@ public class MainActivity extends AppCompatActivity {
         if (mApNativeAd != null) {
             MiaAd.getInstance().populateNativeAdView(this, mApNativeAd, frAds, shimmerAds);
         }
+
+        // In-App Purchase
+        AppPurchase.getInstance().setPurchaseListener(new PurchaseListener() {
+            @Override
+            public void onProductPurchased(String productId, String transactionDetails) {
+                Toast.makeText(MainActivity.this, "onProductPurchased", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void displayErrorMessage(String errorMsg) {
+                Toast.makeText(MainActivity.this, "displayErrorMessage", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onUserCancelBilling() {
+                Toast.makeText(MainActivity.this, "onUserCancelBilling", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btnIap.setOnClickListener(v -> AppPurchase.getInstance().purchase(MainActivity.this, "android.test.purchased"));
 
     }
 }
