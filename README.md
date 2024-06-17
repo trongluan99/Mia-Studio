@@ -66,7 +66,7 @@
             android:value="true"/>
 ~~~
 
-# Create class Application
+# Class Application
 ~~~
 public class App extends AdsMultiDexApplication {
     @Override
