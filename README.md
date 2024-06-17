@@ -218,6 +218,28 @@ btnShowReward.setOnClickListener(v -> {
         });
 ~~~
 
+# In-App Purchase
+~~~
+AppPurchase.getInstance().setPurchaseListener(new PurchaseListener() {
+            @Override
+            public void onProductPurchased(String productId, String transactionDetails) {
+                Toast.makeText(MainActivity.this, "onProductPurchased", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void displayErrorMessage(String errorMsg) {
+                Toast.makeText(MainActivity.this, "displayErrorMessage", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onUserCancelBilling() {
+                Toast.makeText(MainActivity.this, "onUserCancelBilling", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+btnIap.setOnClickListener(v -> AppPurchase.getInstance().purchase(MainActivity.this, "android.test.purchased"));
+~~~
+
 
 
 
