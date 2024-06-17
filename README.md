@@ -73,6 +73,7 @@ public class App extends AdsMultiDexApplication {
     public void onCreate() {
         super.onCreate();
         initAds();
+        initBilling();
     }
 
     private void initAds() {
@@ -90,6 +91,13 @@ public class App extends AdsMultiDexApplication {
         Admob.getInstance().setDisableAdResumeWhenClickAds(true);
         Admob.getInstance().setOpenActivityAfterShowInterAds(true);
         AppOpenManager.getInstance().disableAppResumeWithActivity(MainActivity.class);
+    }
+
+    private void initBilling(){
+        List<String> listIAP = new ArrayList<>();
+        listIAP.add("android.test.purchased");
+        List<String> listSub = new ArrayList<>();
+        AppPurchase.getInstance().initBilling(this, listIAP, listSub);
     }
 }
 ~~~
@@ -165,7 +173,50 @@ MiaAd.getInstance().loadNativeAdResultCallback(this, BuildConfig.ad_native, R.la
 if (mApNativeAd != null) {
             MiaAd.getInstance().populateNativeAdView(this, mApNativeAd, frAds, shimmerAds);
         }
-~~~   
+~~~
+
+# Reward: Load
+~~~
+private RewardedAd rewardedAds;
+MiaAd.getInstance().initRewardAds(this, BuildConfig.ad_reward, new AdCallback() {
+                @Override
+                public void onRewardAdLoaded(RewardedAd rewardedAd) {
+                    super.onRewardAdLoaded(rewardedAd);
+                    rewardedAds = rewardedAd;
+                    Toast.makeText(MainActivity.this, "Ads Ready", Toast.LENGTH_SHORT).show();
+                }
+            });
+~~~
+# Reward: Show
+~~~
+private boolean isEarn = false;
+btnShowReward.setOnClickListener(v -> {
+            isEarn = false;
+            MiaAd.getInstance().showRewardAds(MainActivity.this, rewardedAds, new RewardCallback() {
+                @Override
+                public void onUserEarnedReward(RewardItem var1) {
+                    isEarn = true;
+                }
+
+                @Override
+                public void onRewardedAdClosed() {
+                    if (isEarn) {
+                        // action intent
+                    }
+                }
+
+                @Override
+                public void onRewardedAdFailedToShow(int codeError) {
+
+                }
+
+                @Override
+                public void onAdClicked() {
+
+                }
+            });
+        });
+~~~
 
 
 
