@@ -30,6 +30,7 @@ import com.adjust.sdk.OnSessionTrackingSucceededListener;
 import com.ads.mia.admob.Admob;
 import com.ads.mia.admob.AppOpenManager;
 import com.ads.mia.ads.wrapper.ApInterstitialAd;
+import com.ads.mia.ads.wrapper.ApInterstitialPriorityAd;
 import com.ads.mia.ads.wrapper.ApNativeAd;
 import com.ads.mia.config.MiaAdConfig;
 import com.ads.mia.event.MiaAdjust;
@@ -468,5 +469,4 @@ public class MiaAd {
     public void showRewardAds(Activity context, RewardedAd rewardedAd, RewardCallback adCallback) {
         Admob.getInstance().showRewardAds(context, rewardedAd, adCallback);
     }
-
 }
