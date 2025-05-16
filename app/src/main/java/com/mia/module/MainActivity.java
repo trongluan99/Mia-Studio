@@ -1,6 +1,7 @@
 package com.mia.module;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -15,10 +16,12 @@ import com.ads.mia.ads.wrapper.ApInterstitialAd;
 import com.ads.mia.ads.wrapper.ApNativeAd;
 import com.ads.mia.billing.AppPurchase;
 import com.ads.mia.funtion.AdCallback;
+import com.ads.mia.funtion.AdType;
 import com.ads.mia.funtion.PurchaseListener;
 import com.ads.mia.funtion.RewardCallback;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.gms.ads.AdError;
+import com.google.android.gms.ads.AdValue;
 import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.rewarded.RewardItem;
 import com.google.android.gms.ads.rewarded.RewardedAd;
@@ -58,10 +61,27 @@ public class MainActivity extends AppCompatActivity {
                         mInterstitialAd = apInterstitialAd;
                         Toast.makeText(MainActivity.this, "Ads Ready", Toast.LENGTH_SHORT).show();
                     }
+
+                    @Override
+                    public void onAdLogRev(AdValue adValue, String adUnitId, String mediationAdapterClassName, AdType adType) {
+                        super.onAdLogRev(adValue, adUnitId, mediationAdapterClassName, adType);
+                        Log.d("LuanDev", "onAdLogRev: 1M: " + adValue + " " + adUnitId + " " + mediationAdapterClassName + " " + adType);
+                    }
                 });
             }
         });
         btnShow.setOnClickListener(v -> MiaAd.getInstance().forceShowInterstitial(MainActivity.this, mInterstitialAd, new AdCallback() {
+            @Override
+            public void onAdClicked() {
+                super.onAdClicked();
+                Log.d("LuanDev", "onAdClicked: 1M");
+            }
+
+            @Override
+            public void onAdImpression() {
+                super.onAdImpression();
+                Log.d("LuanDev", "onAdImpression: 1M");
+            }
         }, true));
 
         // Banner Ads
@@ -166,6 +186,21 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onAdClicked() {
+
+                }
+
+                @Override
+                public void onAdClicked(String adUnitId, String mediationAdapterClassName, AdType adType) {
+
+                }
+
+                @Override
+                public void onAdImpression() {
+
+                }
+
+                @Override
+                public void onAdLogRev(AdValue adValue, String adUnitId, String mediationAdapterClassName, AdType adType) {
 
                 }
             });
